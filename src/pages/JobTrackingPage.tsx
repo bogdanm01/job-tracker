@@ -1,7 +1,9 @@
-import React from "react";
-
 const JobTrackingPage = () => {
-  return <div>Job Tracking</div>;
+  return (
+    <div>
+      <h1>Job Tracking</h1>
+    </div>
+  );
 };
 
 export default JobTrackingPage;
