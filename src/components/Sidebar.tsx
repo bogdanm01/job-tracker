@@ -13,6 +13,7 @@ import {
   ChartPieIcon,
   FolderIcon,
   SparklesIcon,
+  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 
 import SidebarNavButton from "./SidebarNavButton";
@@ -22,7 +23,7 @@ const Sidebar = () => {
     <div className="row-start-1 row-end-3 col-start-1 h-full w-[240px] flex flex-col p-3 border-r-1 border-gray-100">
       {/* Logo */}
       <div className="flex items-center gap-2 mt-6 ml-4">
-        <div className="bg-gradient-to-br from-green-400 to-green-300 shadow-xl shadow-green-200 p-1 rounded-md">
+        <div className="bg-gradient-to-br from-blue-400 to-blue-600 shadow-xl shadow-blue-200 p-1 rounded-md">
           <svg
             className="size-6"
             fill="white"
@@ -52,7 +53,7 @@ const Sidebar = () => {
           text="Overview"
         />
         <SidebarNavButton
-          icon={<DocumentIcon className="size-5" />}
+          icon={<DocumentTextIcon className="size-5" />}
           linkTo={"resume"}
           text="Resume Builder"
         />
