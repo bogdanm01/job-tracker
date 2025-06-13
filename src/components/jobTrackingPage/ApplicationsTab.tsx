@@ -5,7 +5,7 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/button";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Input } from "@heroui/input";
 import { Chip } from "@heroui/chip";
 import {
@@ -16,6 +16,8 @@ import {
   TableRow,
   TableCell,
 } from "@heroui/table";
+import { log } from "console";
+import { JobApplication } from "@/interfaces/JobApplication";
 
 const columns = [
   {
@@ -48,49 +50,21 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: "1",
-    jobTitle: "Frontend Software Developer",
-    jobDescription: "Javascript dev at Microsoft",
-    company: "Microsoft",
-    companyImgUrl:
-      "https://cdn.brandfetch.io/idchmboHEZ/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-    stage: "Applied",
-    appliedAt: "10 Jun 2025",
-    location: "Remote",
-    updatedAt: "11 jun 2025",
-    actions: "",
-  },
-  {
-    id: "2",
-    jobTitle: "Javascript Engineer",
-    jobDescription: "Engineer on Angular team",
-    company: "Google",
-    companyImgUrl:
-      "https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-    stage: "Interview",
-    appliedAt: "08 Jun 2025",
-    location: "Remote",
-    updatedAt: "",
-    actions: "",
-  },
-  {
-    id: "3",
-    jobTitle: "Javascript Engineer",
-    jobDescription: "Engineer on Angular team",
-    company: "Adobe",
-    companyImgUrl:
-      "https://cdn.brandfetch.io/id_KsyK7J9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-    stage: "Interview",
-    appliedAt: "08 Jun 2025",
-    location: "Remote",
-    updatedAt: "",
-    actions: "",
-  },
-];
-
 const ApplicationsTab = () => {
+  const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
+
+  // TODO: Use data fetching solution with caching, use state management solution (tanstack or redux)
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:3000/applications");
+      const data = await res.json();
+
+      setJobApplications(data);
+    };
+
+    fetchData();
+  }, []);
+
   const renderCell = useCallback((application: any, columnKey: React.Key) => {
     const cellValue = application[columnKey as keyof any];
 
@@ -153,7 +127,7 @@ const ApplicationsTab = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={rows}>
+        <TableBody items={jobApplications}>
           {(item) => (
             <TableRow key={item.id}>
               {(columnKey) => (
