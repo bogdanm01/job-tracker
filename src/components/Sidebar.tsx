@@ -21,7 +21,6 @@ import SidebarNavButton from "./SidebarNavButton";
 const Sidebar = () => {
   return (
     <div className="row-start-1 row-end-3 col-start-1 h-full w-[240px] flex flex-col p-3 border-r-1 border-gray-100">
-      {/* Logo */}
       <div className="flex items-center gap-2 mt-6 ml-4">
         <div className="bg-gradient-to-br from-blue-400 to-blue-600 shadow-xl shadow-blue-200 p-1 rounded-md">
           <svg

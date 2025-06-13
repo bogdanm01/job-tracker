@@ -27,13 +27,25 @@
     {
       "id": "3",
       "jobTitle": "Javascript Engineer",
-      "jobDescription": "Engineer on Angular team",
+      "jobDescription": "Staff JavaScript Developer at Photoshop",
       "company": "Adobe",
       "companyImgUrl": "https://cdn.brandfetch.io/id_KsyK7J9/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-      "stage": "Interview",
+      "stage": "Offer",
       "appliedAt": "08 Jun 2025",
       "location": "Remote",
-      "updatedAt": "",
+      "updatedAt": "Yesterday",
+      "actions": ""
+    },
+    {
+      "id": "4",
+      "jobTitle": "Full Stack Developer",
+      "jobDescription": "Senior Node.js Full Stack developer",
+      "company": "Amazon",
+      "companyImgUrl": "https://cdn.brandfetch.io/idawOgYOsG/theme/dark/symbol.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+      "stage": "Rejected",
+      "appliedAt": "08 Jun 2025",
+      "location": "Remote",
+      "updatedAt": "Today",
       "actions": ""
     }
   ]
