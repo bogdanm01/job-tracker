@@ -8,6 +8,8 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
+import { Form } from "@heroui/form";
+
 import { Button } from "@heroui/button";
 import { useCallback, useEffect, useState } from "react";
 import { Input } from "@heroui/input";
@@ -99,14 +101,14 @@ const stages = [
 
 const NewApplicationModal = ({ isOpen, onOpenChange }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState({});
 
-  const onSave = (onClose: any) => {
-    setIsLoading(true);
+  const onSubmit = (e: any) => {
+    e.preventDefault();
 
-    setTimeout(() => {
-      setIsLoading(false);
-      onClose();
-    }, 1500);
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+
+    console.log(data);
   };
 
   return (
@@ -141,111 +143,112 @@ const NewApplicationModal = ({ isOpen, onOpenChange }: any) => {
                     Track new job application process
                   </p> */}
             </ModalHeader>
-            <ModalBody>
-              <div className="flex items-center gap-1">
-                {/* <InformationCircleIcon className="size-5" /> */}
-                <h3 className="text-gray-700 text-sm ml-0.5 mb-0.5">
-                  Application Details
-                </h3>
-              </div>
-              <div className="flex gap-2.5">
-                <Input
-                  // endContent={
-                  //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                  // }
-                  label="Job Title"
-                  placeholder="Enter job title"
-                  // labelPlacement="outside"
-                  variant="bordered"
-                  isRequired
-                />
-                <Autocomplete
-                  defaultItems={companies}
-                  label="Company"
-                  placeholder="Select a company"
-                  variant="bordered"
-                  isRequired
-                >
-                  {(item) => (
-                    <AutocompleteItem
-                      key={item.key}
-                      startContent={
-                        <div className="flex items-center gap-3">
-                          {item.imgUrl ? (
-                            <img src={item.imgUrl} alt="" className="w-6" />
-                          ) : (
-                            <div className="flex items-center justify-center bg-indigo-50 rounded-full w-6 p-0.5">
-                              <BriefcaseIcon className="size-5 text-indigo-900" />
-                            </div>
-                          )}
-                        </div>
-                      }
-                    >
-                      {item.label}
-                    </AutocompleteItem>
-                  )}
-                </Autocomplete>
-              </div>
-
-              <div className="flex gap-2.5">
-                <Select
-                  // className="max-w-xs"
-                  items={stages}
-                  label="Stage"
-                  // labelPlacement="outside"
-                  variant="bordered"
-                  isRequired
-                  placeholder="Select application stage"
-                >
-                  {(stage) => (
-                    <SelectItem key={stage.id} textValue={stage.name}>
-                      <div className="flex gap-2 items-center">
-                        <Chip className={stageColorMap[stage.name]}>
-                          {stage.name}
-                        </Chip>
-                      </div>
-                    </SelectItem>
-                  )}
-                </Select>
-                <DatePicker variant="bordered" label="Application Date" />
-              </div>
-
-              <h3 className="text-gray-700 text-sm mt-3 ml-0.5 mb-0.5">
-                Description and URL
-              </h3>
-              <Input
-                // endContent={
-                //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                // }
-                label="Job Description"
-                placeholder="Enter short description"
-                // labelPlacement="outside"
-                variant="bordered"
-              />
-
-              <Input
-                // endContent={
-                //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                // }
-                label="Posting URL"
-                placeholder="Enter job posting URL"
-                // labelPlacement="outside"
-                variant="bordered"
-              />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <Button
-                color="primary"
-                onPress={() => onSave(onClose)}
-                isLoading={isLoading}
+            <ModalBody className="block p-0">
+              <Form
+                className="flex flex-1 flex-col gap-3 px-6 py-2 items-stretch"
+                validationErrors={errors}
+                onSubmit={onSubmit}
               >
-                {!isLoading && <PlusIcon className="size-5" />}
-                {isLoading ? "Processing" : "Add Application"}
-              </Button>
-            </ModalFooter>
+                <div className="flex items-center gap-1">
+                  <h3 className="text-gray-700 text-sm ml-0.5 mb-0.5">
+                    Application Details
+                  </h3>
+                </div>
+                <div className="flex gap-2.5">
+                  <Input
+                    label="Job Title"
+                    placeholder="Enter job title"
+                    variant="bordered"
+                    name="jobTitle"
+                    isRequired
+                  />
+                  <Autocomplete
+                    defaultItems={companies}
+                    label="Company"
+                    placeholder="Select a company"
+                    variant="bordered"
+                    name="company"
+                    isRequired
+                  >
+                    {(item) => (
+                      <AutocompleteItem
+                        key={item.key}
+                        startContent={
+                          <div className="flex items-center gap-3">
+                            {item.imgUrl ? (
+                              <img src={item.imgUrl} alt="" className="w-6" />
+                            ) : (
+                              <div className="flex items-center justify-center bg-indigo-50 rounded-full w-6 p-0.5">
+                                <BriefcaseIcon className="size-5 text-indigo-900" />
+                              </div>
+                            )}
+                          </div>
+                        }
+                      >
+                        {item.label}
+                      </AutocompleteItem>
+                    )}
+                  </Autocomplete>
+                </div>
+
+                <div className="flex gap-2.5">
+                  <Select
+                    items={stages}
+                    label="Stage"
+                    variant="bordered"
+                    isRequired
+                    placeholder="Select application stage"
+                    name="stage"
+                  >
+                    {(stage) => (
+                      <SelectItem key={stage.id} textValue={stage.name}>
+                        <div className="flex gap-2 items-center">
+                          <Chip className={stageColorMap[stage.name]}>
+                            {stage.name}
+                          </Chip>
+                        </div>
+                      </SelectItem>
+                    )}
+                  </Select>
+                  <DatePicker
+                    variant="bordered"
+                    label="Application Date"
+                    name="appliedAt"
+                  />
+                </div>
+
+                <h3 className="text-gray-700 text-sm mt-3 ml-0.5 mb-0.5">
+                  Description and URL
+                </h3>
+                <Input
+                  label="Job Description"
+                  placeholder="Enter short description"
+                  variant="bordered"
+                  name="jobDescription"
+                />
+
+                <Input
+                  label="Posting URL"
+                  placeholder="Enter job posting URL"
+                  variant="bordered"
+                  name="jobUrl"
+                />
+                <footer className="flex flex-row gap-2 justify-end items-center py-4">
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Close
+                  </Button>
+                  <Button
+                    type="submit"
+                    color="primary"
+                    // onPress={() => onSave(onClose)}
+                    isLoading={isLoading}
+                  >
+                    {!isLoading && <PlusIcon className="size-5" />}
+                    {isLoading ? "Processing" : "Add Application"}
+                  </Button>
+                </footer>
+              </Form>
+            </ModalBody>
           </>
         )}
       </ModalContent>
