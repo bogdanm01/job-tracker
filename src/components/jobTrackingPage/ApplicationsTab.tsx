@@ -55,7 +55,7 @@ const columns = [
 
 const ApplicationsTab = () => {
   const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   // TODO: Use data fetching solution with caching, use state management solution (tanstack or redux)
   useEffect(() => {
@@ -120,7 +120,11 @@ const ApplicationsTab = () => {
           <PlusIcon className="size-5" />
           New Application
         </Button>
-        <NewApplicationModal isOpen={isOpen} onOpenChange={onOpenChange} />
+        <NewApplicationModal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          onClose={onClose}
+        />
         <div className="flex items-center gap-3">
           <Button isIconOnly className="bg-gray-100">
             <AdjustmentsHorizontalIcon className="size-5" />

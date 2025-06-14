@@ -9,8 +9,7 @@
       "stage": "Applied",
       "appliedAt": "10 Jun 2025",
       "location": "Remote",
-      "updatedAt": "11 jun 2025",
-      "actions": ""
+      "updatedAt": "11 jun 2025"
     },
     {
       "id": "2",
@@ -21,8 +20,7 @@
       "stage": "Interview",
       "appliedAt": "08 Jun 2025",
       "location": "Remote",
-      "updatedAt": "",
-      "actions": ""
+      "updatedAt": ""
     },
     {
       "id": "3",
@@ -33,8 +31,7 @@
       "stage": "Offer",
       "appliedAt": "08 Jun 2025",
       "location": "Remote",
-      "updatedAt": "Yesterday",
-      "actions": ""
+      "updatedAt": "Yesterday"
     },
     {
       "id": "4",
@@ -45,8 +42,7 @@
       "stage": "Rejected",
       "appliedAt": "08 Jun 2025",
       "location": "Remote",
-      "updatedAt": "Today",
-      "actions": ""
+      "updatedAt": "Today"
     }
   ]
 }
