@@ -21,6 +21,7 @@ import { useDisclosure } from "@heroui/modal";
 import NewApplicationModal from "./NewApplicationModal";
 
 import { JobApplication } from "@/interfaces/JobApplication";
+import { useJobApplications } from "@/hooks/useJobApplications";
 
 const columns = [
   {
@@ -49,25 +50,17 @@ const columns = [
   },
   {
     key: "actions",
-    label: "ACTIONS",
+    label: "",
   },
 ];
 
 const ApplicationsTab = () => {
-  const [jobApplications, setJobApplications] = useState<JobApplication[]>([]);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
-  // TODO: Use data fetching solution with caching, use state management solution (tanstack or redux)
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:3000/applications");
-      const data = await res.json();
-
-      setJobApplications(data);
-    };
-
-    fetchData();
-  }, []);
+  const {
+    data: jobApplications = [],
+    isLoading,
+    isError,
+  } = useJobApplications();
 
   const stageColorMap: Record<string, string> = {
     Applied: "bg-violet-100 text-violet-600",
