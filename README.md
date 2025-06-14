@@ -1,50 +1,54 @@
-# Vite & HeroUI Template
+# 💼 Job Tracker App
 
-This is a template for creating applications using Vite and HeroUI (v2).
+A full-stack job tracking application built with **React + TanStack Query + Node.js + Express + PostgreSQL**. Includes authentication, job management features, and modern UI components powered by HeroUI.
 
-[Try it on CodeSandbox](https://githubbox.com/frontio-ai/vite-template)
+---
 
-## Technologies Used
+## ✨ Features
 
-- [Vite](https://vitejs.dev/guide/)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+- 🔐 Authentication (Clerk integration ready)
+- 📋 Track job applications with status, tags, and notes
+- 📅 Reminder system for interviews and follow-ups
+- 📄 Resume builder and document uploads
+- 🧠 AI-powered cover letter suggestions (planned)
+- 🗓️ Calendar integration (coming soon)
+- 🔍 Filter, search, and sort applications
+- 🚀 Optimized with TanStack Query for data caching and mutation handling
 
-## How to Use
+---
 
-To clone the project, run the following command:
+## 🛠 Tech Stack
 
-```bash
-git clone https://github.com/frontio-ai/vite-template.git
-```
+### Frontend
 
-### Install dependencies
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [HeroUI](https://heroui.dev/) for design system
+- [TanStack Query](https://tanstack.com/query/latest) (React Query)
+- [React Router](https://reactrouter.com/)
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+### Backend
 
-```bash
-npm install
-```
+- [Node.js](https://nodejs.org/)
+- [Express.js](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Zod](https://zod.dev/) for validation
 
-### Run the development server
+---
 
-```bash
-npm run dev
-```
+## 📦 Project Structure
 
-### Setup pnpm (optional)
+✅ TODO (MVP Progress)
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+- [ ] Auth setup
+- [ ] Job application table UI
+- [ ] Modal form with validation
+- [x] React Query integration
+- [ ] Infinite scroll / pagination
+- [ ] AI form fill from job post URL
+- [ ] Mobile responsiveness
+- [ ] Upload resumes/documents
 
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/frontio-ai/vite-template/blob/main/LICENSE).
+📄 MIT License
