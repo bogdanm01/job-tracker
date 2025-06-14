@@ -39,6 +39,7 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 ---
 
 ## 📦 Project Structure
+N/A
 
 ✅ TODO (MVP Progress)
 
