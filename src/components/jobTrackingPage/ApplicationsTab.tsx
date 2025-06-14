@@ -5,7 +5,7 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/button";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo } from "react";
 import { Input } from "@heroui/input";
 import { Chip } from "@heroui/chip";
 import {
@@ -17,10 +17,10 @@ import {
   TableCell,
 } from "@heroui/table";
 import { useDisclosure } from "@heroui/modal";
+import { Spinner } from "@heroui/spinner";
 
 import NewApplicationModal from "./NewApplicationModal";
 
-import { JobApplication } from "@/interfaces/JobApplication";
 import { useJobApplications } from "@/hooks/useJobApplications";
 
 const columns = [
@@ -54,6 +54,26 @@ const columns = [
   },
 ];
 
+const LOADING_MESSAGES = [
+  "Brewing data potion…",
+  "Feeding the server hamsters…",
+  "Waking up digital gremlins…",
+  "Aligning the loading stars…",
+  "Fetching pixels with style…",
+  "Whispering to the database…",
+  "Spinning up something cool…",
+  "Dusting off job listings…",
+  "Translating binary into magic…",
+  "Reticulating splines, please wait…",
+];
+
+const stageColorMap: Record<string, string> = {
+  Applied: "bg-violet-100 text-violet-600",
+  Interview: "bg-blue-100 text-blue-600",
+  Offer: "bg-green-100 text-green-600",
+  Rejected: "bg-red-100 text-red-600",
+};
+
 const ApplicationsTab = () => {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const {
@@ -62,12 +82,10 @@ const ApplicationsTab = () => {
     isError,
   } = useJobApplications();
 
-  const stageColorMap: Record<string, string> = {
-    Applied: "bg-violet-100 text-violet-600",
-    Interview: "bg-blue-100 text-blue-600",
-    Offer: "bg-green-100 text-green-600",
-    Rejected: "bg-red-100 text-red-600",
-  };
+  const loadingMessage = useMemo(
+    () => LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)],
+    []
+  );
 
   const renderCell = useCallback((application: any, columnKey: React.Key) => {
     const cellValue = application[columnKey as keyof any];
@@ -137,7 +155,21 @@ const ApplicationsTab = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={jobApplications}>
+        <TableBody
+          items={jobApplications}
+          isLoading={isLoading}
+          loadingContent={
+            <Spinner
+              variant="gradient"
+              label={loadingMessage}
+              size="sm"
+              classNames={{
+                base: "flex-row gap-3 mt-5 items-center",
+                label: "text-sm animate-pulse text-gray-500",
+              }}
+            />
+          }
+        >
           {(item) => (
             <TableRow key={item.id}>
               {(columnKey) => (
