@@ -5,7 +5,7 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/button";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Input } from "@heroui/input";
 import { Chip } from "@heroui/chip";
 import {
@@ -55,16 +55,16 @@ const columns = [
 ];
 
 const LOADING_MESSAGES = [
-  "Brewing data potion…",
-  "Feeding the server hamsters…",
-  "Waking up digital gremlins…",
-  "Aligning the loading stars…",
-  "Fetching pixels with style…",
-  "Whispering to the database…",
-  "Spinning up something cool…",
-  "Dusting off job listings…",
-  "Translating binary into magic…",
-  "Reticulating splines, please wait…",
+  "Initializing neural grid…",
+  "Decrypting access sequence…",
+  "Stabilizing quantum loop…",
+  "Engaging photon uplink…",
+  "Splicing mainframe threads…",
+  "Recalibrating optic array…",
+  "Amplifying signal matrix…",
+  "Compiling mission payload…",
+  "Extracting encrypted cores…",
+  "Activating stealth protocol…",
 ];
 
 const stageColorMap: Record<string, string> = {
@@ -72,6 +72,44 @@ const stageColorMap: Record<string, string> = {
   Interview: "bg-blue-100 text-blue-600",
   Offer: "bg-green-100 text-green-600",
   Rejected: "bg-red-100 text-red-600",
+};
+
+function getNextRandomMessage(current: string): string {
+  let next = current;
+
+  while (next === current) {
+    next =
+      LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
+  }
+
+  return next;
+}
+
+const CyclingSpinner = ({ isLoading }: { isLoading: boolean }) => {
+  const [message, setMessage] = useState(
+    () => LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)]
+  );
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const interval = setInterval(() => {
+      setMessage((prev) => getNextRandomMessage(prev));
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
+  return (
+    <Spinner
+      variant="gradient"
+      label={message}
+      size="sm"
+      classNames={{
+        base: "flex-row gap-3 mt-2",
+        label: "text-sm mt-2 animate-pulse",
+      }}
+    />
+  );
 };
 
 const ApplicationsTab = () => {
@@ -82,10 +120,7 @@ const ApplicationsTab = () => {
     isError,
   } = useJobApplications();
 
-  const loadingMessage = useMemo(
-    () => LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)],
-    []
-  );
+  console.log("render");
 
   const renderCell = useCallback((application: any, columnKey: React.Key) => {
     const cellValue = application[columnKey as keyof any];
@@ -158,17 +193,7 @@ const ApplicationsTab = () => {
         <TableBody
           items={jobApplications}
           isLoading={isLoading}
-          loadingContent={
-            <Spinner
-              variant="gradient"
-              label={loadingMessage}
-              size="sm"
-              classNames={{
-                base: "flex-row gap-3 mt-5 items-center",
-                label: "text-sm animate-pulse text-gray-500",
-              }}
-            />
-          }
+          loadingContent={<CyclingSpinner isLoading={isLoading} />}
         >
           {(item) => (
             <TableRow key={item.id}>
