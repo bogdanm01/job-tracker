@@ -2,8 +2,6 @@
 
 A full-stack job tracking application built with **React + TanStack Query + Node.js + Express + PostgreSQL**. Includes authentication, job management features, and modern UI components powered by HeroUI.
 
----
-
 ## ✨ Features
 
 - 🔐 Authentication (Clerk integration ready)
@@ -14,8 +12,6 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 - 🗓️ Calendar integration (coming soon)
 - 🔍 Filter, search, and sort applications
 - 🚀 Optimized with TanStack Query for data caching and mutation handling
-
----
 
 ## 🛠 Tech Stack
 
@@ -36,11 +32,11 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Zod](https://zod.dev/) for validation
 
----
 
 ## 📦 Project Structure
+N/A
 
-✅ TODO (MVP Progress)
+## ✅ TODO (MVP Progress)
 
 - [ ] Auth setup
 - [ ] Job application table UI
@@ -50,5 +46,3 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 - [ ] AI form fill from job post URL
 - [ ] Mobile responsiveness
 - [ ] Upload resumes/documents
-
-📄 MIT License
