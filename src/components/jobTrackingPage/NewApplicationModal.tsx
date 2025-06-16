@@ -9,6 +9,7 @@ import { DatePicker } from "@heroui/date-picker";
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/modal";
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import validator from "validator";
+import { useJobApplications } from "@/hooks/useJobApplications";
 
 const stageColorMap: Record<string, string> = {
   Applied: "bg-violet-100 text-violet-600",
@@ -67,9 +68,9 @@ const stages = [
 
 const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const [companies] = useState(companiesArr);
   const [selectedCompany, setSelectedCompany] = useState<any>(null);
+  const { refetch } = useJobApplications();
 
   const [selectedStage, setSelectedStage] = useState({
     id: "1",
@@ -84,15 +85,18 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
     });
   }, [isOpen]);
 
-  const validateJobTitle = useCallback((value: string) => {
-    if (!value) {
-      return "Required";
-    } else if (!validator.isLength(value, { min: 3 })) {
-      return "Must be at least 3 characters long";
-    } else if (!validator.isLength(value, { max: 50 })) {
-      return "Cant be longer than 50 characters";
-    }
-  }, []);
+  const validateRequiredAndMinMaxLength = useCallback(
+    (value: string, minLength: number, maxLength: number) => {
+      if (!value) {
+        return "Required";
+      } else if (!validator.isLength(value, { min: minLength })) {
+        return `Must be at least ${minLength} characters long`;
+      } else if (!validator.isLength(value, { max: maxLength })) {
+        return `Cant be longer than ${maxLength} characters`;
+      }
+    },
+    []
+  );
 
   const validateJobDescription = useCallback((value: string) => {
     if (value) {
@@ -132,8 +136,6 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
       location: "Remote",
     };
 
-    console.log(newApplication);
-
     try {
       const res = await fetch("http://localhost:3000/applications", {
         method: "POST",
@@ -143,6 +145,7 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
 
       if (!res.ok) throw new Error("Failed to create application");
 
+      refetch();
       onClose();
     } catch (err) {
       console.error("Error posting to API:", err);
@@ -196,9 +199,21 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
                   variant="bordered"
                   name="jobTitle"
                   isRequired
-                  validate={validateJobTitle}
+                  validate={(value) =>
+                    validateRequiredAndMinMaxLength(value, 3, 50)
+                  }
                 />
-                <Autocomplete
+                <Input
+                  label="Company"
+                  placeholder="Enter company name"
+                  variant="bordered"
+                  name="companyName"
+                  isRequired
+                  validate={(value) =>
+                    validateRequiredAndMinMaxLength(value, 1, 50)
+                  }
+                />
+                {/* <Autocomplete
                   defaultItems={companies}
                   label="Company"
                   placeholder="Select a company"
@@ -231,7 +246,7 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
                       {item.name}
                     </AutocompleteItem>
                   )}
-                </Autocomplete>
+                </Autocomplete> */}
               </div>
               <div className="flex gap-2.5">
                 <Select
