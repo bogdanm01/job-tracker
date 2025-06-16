@@ -5,7 +5,7 @@ import {
   EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import { Button } from "@heroui/button";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { Input } from "@heroui/input";
 import { Chip } from "@heroui/chip";
 import {
@@ -17,8 +17,8 @@ import {
   TableCell,
 } from "@heroui/table";
 import { useDisclosure } from "@heroui/modal";
-import { Spinner } from "@heroui/spinner";
 
+import CyclingSpinner from "./CyclingSpinner";
 import NewApplicationModal from "./NewApplicationModal";
 
 import { useJobApplications } from "@/hooks/useJobApplications";
@@ -54,62 +54,11 @@ const columns = [
   },
 ];
 
-const LOADING_MESSAGES = [
-  "Initializing neural grid…",
-  "Decrypting access sequence…",
-  "Stabilizing quantum loop…",
-  "Engaging photon uplink…",
-  "Splicing mainframe threads…",
-  "Recalibrating optic array…",
-  "Amplifying signal matrix…",
-  "Compiling mission payload…",
-  "Extracting encrypted cores…",
-  "Activating stealth protocol…",
-];
-
 const stageColorMap: Record<string, string> = {
   Applied: "bg-violet-100 text-violet-600",
   Interview: "bg-blue-100 text-blue-600",
   Offer: "bg-green-100 text-green-600",
   Rejected: "bg-red-100 text-red-600",
-};
-
-function getNextRandomMessage(current: string): string {
-  let next = current;
-
-  while (next === current) {
-    next =
-      LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)];
-  }
-
-  return next;
-}
-
-const CyclingSpinner = ({ isLoading }: { isLoading: boolean }) => {
-  const [message, setMessage] = useState(
-    () => LOADING_MESSAGES[Math.floor(Math.random() * LOADING_MESSAGES.length)]
-  );
-
-  useEffect(() => {
-    if (!isLoading) return;
-    const interval = setInterval(() => {
-      setMessage((prev) => getNextRandomMessage(prev));
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, [isLoading]);
-
-  return (
-    <Spinner
-      variant="gradient"
-      label={message}
-      size="sm"
-      classNames={{
-        base: "flex-row gap-3 mt-2",
-        label: "text-sm mt-2 animate-pulse",
-      }}
-    />
-  );
 };
 
 const ApplicationsTab = () => {
@@ -119,8 +68,6 @@ const ApplicationsTab = () => {
     isLoading,
     isError,
   } = useJobApplications();
-
-  console.log("render");
 
   const renderCell = useCallback((application: any, columnKey: React.Key) => {
     const cellValue = application[columnKey as keyof any];
@@ -166,11 +113,13 @@ const ApplicationsTab = () => {
           <PlusIcon className="size-5" />
           New Application
         </Button>
-        <NewApplicationModal
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          onClose={onClose}
-        />
+        {isOpen && (
+          <NewApplicationModal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            onClose={onClose}
+          />
+        )}
         <div className="flex items-center gap-3">
           <Button isIconOnly className="bg-gray-100">
             <AdjustmentsHorizontalIcon className="size-5" />
