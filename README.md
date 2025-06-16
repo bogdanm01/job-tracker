@@ -24,7 +24,7 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 - [TanStack Query](https://tanstack.com/query/latest) (React Query)
 - [React Router](https://reactrouter.com/)
 
-### Backend
+### Backend (Subject to change)
 
 - [Node.js](https://nodejs.org/)
 - [Express.js](https://expressjs.com/)
