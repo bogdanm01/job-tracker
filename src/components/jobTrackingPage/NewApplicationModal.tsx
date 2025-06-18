@@ -207,7 +207,7 @@ const NewApplicationModal = ({ isOpen, onOpenChange, onClose }: any) => {
                   label="Company"
                   placeholder="Enter company name"
                   variant="bordered"
-                  name="companyName"
+                  name="company"
                   isRequired
                   validate={(value) =>
                     validateRequiredAndMinMaxLength(value, 1, 50)

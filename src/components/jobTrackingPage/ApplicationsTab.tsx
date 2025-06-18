@@ -23,6 +23,9 @@ import NewApplicationModal from "./NewApplicationModal";
 
 import { useJobApplications } from "@/hooks/useJobApplications";
 
+import { createAvatar } from "@dicebear/core";
+import { initials } from "@dicebear/collection";
+
 const columns = [
   {
     key: "jobTitle",
@@ -54,6 +57,14 @@ const columns = [
   },
 ];
 
+const getAvatar = (name: string) => {
+  return createAvatar(initials, {
+    seed: name,
+    radius: 100,
+    backgroundType: ["gradientLinear", "solid"],
+  }).toDataUri();
+};
+
 const stageColorMap: Record<string, string> = {
   Applied: "bg-violet-100 text-violet-600",
   Interview: "bg-blue-100 text-blue-600",
@@ -76,7 +87,12 @@ const ApplicationsTab = () => {
       case "jobTitle": {
         return (
           <div className="flex items-center gap-3">
-            <img src={application.companyImgUrl} alt="" className="w-9" />
+            <img
+              src={application.companyImgUrl || getAvatar(application.company)}
+              alt=""
+              className="w-9"
+            />
+
             <div className="flex flex-col gap-0]">
               <p className="font-medium">{cellValue}</p>
               <p className="text-sm text-gray-400">
