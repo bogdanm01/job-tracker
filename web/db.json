@@ -45,9 +45,20 @@
       "updatedAt": "Today"
     },
     {
-      "id": "b5b6",
-      "jobTitle": "My job",
-      "companyName": "Microsoft",
+      "id": "c403",
+      "jobTitle": "Senior C# Developer",
+      "company": "IBM",
+      "appliedAt": "2025-06-05",
+      "jobDescription": "",
+      "jobUrl": "",
+      "companyImgUrl": "",
+      "stage": "Applied",
+      "location": "Remote"
+    },
+    {
+      "id": "e623",
+      "jobTitle": "Hello",
+      "company": "IBM",
       "appliedAt": "",
       "jobDescription": "",
       "jobUrl": "",
@@ -56,11 +67,11 @@
       "location": "Remote"
     },
     {
-      "id": "a8b9",
-      "jobTitle": "Cool",
-      "companyName": "Hello",
-      "appliedAt": "2025-06-05",
-      "jobDescription": "Very cool job",
+      "id": "9a3a",
+      "jobTitle": "Backend Developer",
+      "company": "fin",
+      "appliedAt": "",
+      "jobDescription": "",
       "jobUrl": "",
       "companyImgUrl": "",
       "stage": "Applied",
