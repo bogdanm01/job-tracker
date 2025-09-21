@@ -1,19 +1,19 @@
-# 💼 Job Tracker App
+# Job Tracker App
 
 A full-stack job tracking application built with **React + TanStack Query + Node.js + Express + PostgreSQL**. Includes authentication, job management features, and modern UI components powered by HeroUI.
 
-## ✨ Features
+## Features
 
-- 🔐 Authentication (Clerk integration ready)
-- 📋 Track job applications with status, tags, and notes
-- 📅 Reminder system for interviews and follow-ups
-- 📄 Resume builder and document uploads
-- 🧠 AI-powered cover letter suggestions (planned)
-- 🗓️ Calendar integration (coming soon)
-- 🔍 Filter, search, and sort applications
-- 🚀 Optimized with TanStack Query for data caching and mutation handling
+- Authentication (Clerk integration ready)
+- Track job applications with status, tags, and notes
+- Reminder system for interviews and follow-ups
+- Resume builder and document uploads
+- AI-powered cover letter suggestions (planned)
+- Calendar integration (coming soon)
+- Filter, search, and sort applications
+- Optimized with TanStack Query for data caching and mutation handling
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -33,10 +33,10 @@ A full-stack job tracking application built with **React + TanStack Query + Node
 - [Zod](https://zod.dev/) for validation
 
 
-## 📦 Project Structure
+## Project Structure
 N/A
 
-## ✅ TODO (MVP Progress)
+## TODO (MVP Progress)
 
 - [ ] Auth setup
 - [ ] Job application table UI
